@@ -1,0 +1,118 @@
+body {
+  background: url("https://static.pexels.com/photos/27662/pexels-photo-27662.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.navbar {
+	overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index:1; /*z-index ensures images go under the navbar upon scrolling */
+}
+
+.underNav {
+    margin-top: 100px; /* Add a top margin to avoid content overlay */
+}
+
+.welcome {
+  color: #ffffff;
+  margin: 10%;
+  justify-content: space-between;
+}
+
+.rightside {
+  width: 25%;
+  box-shadow: none;
+}
+
+ul {
+  margin-left: 30%;
+}
+
+legend {
+  color: black;
+}
+
+img#icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.landingPageText {
+  text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+.landing-container {
+  text-align: center;
+   font-size: 1.5em;
+   width: 500px;
+   vertical-align: middle;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border-radius: 5%;
+   padding: 50px;
+   background: rgba(236, 240, 241, 0.85)
+}
+
+.login-container {
+   width: 500px;
+   vertical-align: middle;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border-radius: 5%;
+   padding: 50px;
+   background: rgba(236, 240, 241, 0.6)
+}
+
+.landingPageButtons {
+  text-align: center;
+  padding: 20px;
+}
+
+.well {
+	margin: 0 30px 0 85px;
+  color: black;
+}
+
+.alert {
+	padding-top: 20px;
+}
+
+.nav-img {
+	height: 50%;
+	width: 50%;
+}
+
+button {
+	margin: 25px;
+}
+
+.weather-input{
+  display: flex;
+  
+}
+
+#map{
+	height: 600px;
+  width: 1200px;
+  margin-left: 50px;
+}
+
+.map-button {
+  margin-left: 45%;
+  margin-bottom: 5px;
+}
+
+

@@ -1,13 +1,14 @@
 const firebase = require('firebase')
 
 // -- // -- // -- // Firebase Config // -- // -- // -- //
+  // Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyBzz-Wq2dzMgM7E8cdSYnYoX5fbVUT-XQo',
-  authDomain: 'firebones-6bc2a.firebaseapp.com',
-  databaseURL: 'https://firebones-6bc2a.firebaseio.com',
-  projectId: 'firebones-6bc2a',
-  storageBucket: 'firebones-6bc2a.appspot.com',
-  messagingSenderId: '1030378391678'
+  apiKey: 'AIzaSyC2I1-zEED6G4PyzJyiNXgBpsNr3oQ78Vk',
+  authDomain: 'weather-routes.firebaseapp.com',
+  databaseURL: 'https://weather-routes.firebaseio.com',
+  projectId: 'weather-routes',
+  storageBucket: 'weather-routes.appspot.com',
+  messagingSenderId: '622068010787'
 }
 // -- // -- // -- // -- // -- // -- // -- // -- // -- //
 

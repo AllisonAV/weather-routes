@@ -1,17 +1,28 @@
 'use strict'
 import React from 'react'
-import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
+import {Router, Route, IndexRedirect, browserHistory, Link} from 'react-router'
 import {render} from 'react-dom'
-
-import WhoAmI from './components/WhoAmI'
-import NotFound from './components/NotFound'
+import {connect, Provider} from 'react-redux'
 
 import firebase from 'APP/fire'
 
-import Demos from 'APP/demos'
+import store from './store'
+
+import AppContainer from './containers/AppContainer'
+
+// import Login from './components/Login'
+import LoginContainer from './containers/LoginContainer'
+import SignUp from './components/SignUp'
+// import WhoAmI from './components/WhoAmI'
+import NotFound from './components/NotFound'
+
+import WeatherContainer from './containers/WeatherContainer'
+import MapGoogleContainer from './containers/MapGoogleContainer'
+import WeatherLocationContainer from './containers/WeatherLocationContainer'
 
 // Get the auth API from Firebase.
 const auth = firebase.auth()
+const email = new firebase.auth.EmailAuthProvider()
 
 // Ensure that we have (almost) always have a user ID, by creating
 // an anonymous user if nobody is signed in.
@@ -39,25 +50,62 @@ auth.onAuthStateChanged(user => user || auth.signInAnonymously())
 
 // Our root App component just renders a little frame with a nav
 // and whatever children the router gave us.
-const App = ({children}) =>
-  <div>
-    <nav>
-      {/* WhoAmI takes a firebase auth API and renders either a
-          greeting and a logout button, or sign in buttons, depending
-          on if anyone's logged in */}
-      <WhoAmI auth={auth}/>
-    </nav>
-    {/* Render our children (whatever the router gives us) */}
-    {children}
-  </div>
+
+// old code from dual-weathr
+          // const ExampleApp = connect(
+          //   ({ auth }) => ({ user: auth })
+          // )(
+          //   ({ user, children }) =>
+          //     <div>
+          //       <nav>
+          //         {user ? <WhoAmI/> : <Login/>}
+          //       </nav>
+          //       {children}
+          //     </div>
+          // )
+
+export default class LandingPage extends React.Component {
+  componentWillMount() {
+    this.unsubscribe = auth.onAuthStateChanged(user => {
+    })
+  }
+  componentWillUnmount() {
+    this.unsubscribe && this.unsubscribe()
+  }
+
+  render() {
+    return (
+      <div className='jumbotron landing-container landingPageText'>
+        <div>Welcome to Weather Routes!!</div>
+        <div className='landingPageButtons'>
+          <Link to='/login'><button className='btn btn-primary landing'>Log In</button></Link>
+          <Link to='/signup'><button className='btn btn-primary landing'>Sign Up</button></Link>
+        </div>
+      </div>
+    )
+  }
+}
+
+const onWeatherLocationEnter = (nextRouterState) => {
+  store.getState()
+}
 
 render(
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRedirect to="demos"/>
-      {Demos /* Put all the demos and a description page at /demos */}
-    </Route>
-    <Route path='*' component={NotFound}/>
-  </Router>,
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={LandingPage} />
+      <Route path="/login" component={LoginContainer} email={email} />
+      <Route path="/signup" component={SignUp} email={email} />
+      <Route path="/app" component={AppContainer} >
+        <IndexRedirect to="/weather" />
+        <Route path="/weather" component={WeatherContainer} />
+        <Route path="/weather/:location1/:location2"
+                component={WeatherLocationContainer}
+                onEnter={onWeatherLocationEnter} />
+        <Route path="/map" component={MapGoogleContainer} />
+      </Route>
+      <Route path='*' component={NotFound} />
+    </Router>
+  </Provider>,
   document.getElementById('main')
 )
