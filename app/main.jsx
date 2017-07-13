@@ -11,7 +11,7 @@ import store from './store'
 import AppContainer from './containers/AppContainer'
 
 // import Login from './components/Login'
-import LoginContainer from './containers/LoginContainer'
+import Login from './components/Login'
 import SignUp from './components/SignUp'
 // import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
@@ -94,7 +94,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={LandingPage} />
-      <Route path="/login" component={LoginContainer} email={email} />
+      <Route path="/login" component={Login} email={email} />
       <Route path="/signup" component={SignUp} email={email} />
       <Route path="/app" component={AppContainer} >
         <IndexRedirect to="/weather" />

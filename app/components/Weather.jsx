@@ -85,15 +85,26 @@ export default class Weather extends Component {
   }
 
   render() {
-    console.log('state in render', this.state)
     return (
       <div>
         <form id='location' className="form-horizontal">
-        <h1>Weather Routes </h1>
           <fieldset>
-            <legend>First Location</legend>
-            <div className="form-group well weather-input">
-              <div className="col-lg-4">
+
+          <div className="row" >
+            <div className="col-lg-2" />
+            <div className="col-lg-3">
+              <h3 className="headers">First Location</h3>
+            </div>
+            <div className="col-lg-2" />
+            <div className="col-lg-3">
+              <h3 className="headers">Second Location</h3>
+            </div>
+            <div className="col-lg-2" />
+          </div>
+
+          <div className="row" >
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
                 <input type="text"
                         placeholder="zip code"
                         className="form-control"
@@ -101,15 +112,40 @@ export default class Weather extends Component {
                         name="zip1"
                         pattern="[0-9]{5}"/>
               </div>
-              <div className="col-lg-8" />
-              <div className="col-lg-4">
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
+                <input type="text"
+                        placeholder="zip code"
+                        className="form-control"
+                        onChange={ this.handleChange }
+                        name="zip2"/>
+              </div>
+              <div className="col-lg-2" />
+          </div>
+
+          <div className="row" >
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
                 <input type="text"
                         placeholder="city"
                         className="form-control"
                         onChange={ this.handleChange }
                         name="city1"/>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
+                <input type="text"
+                        placeholder="city"
+                        className="form-control"
+                        onChange={ this.handleChange }
+                        name="city2"/>
+              </div>
+              <div className="col-lg-2" />
+          </div>
+
+          <div className="row" >
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
                 <select className="form-control"
                     placeholder="state"
                     onChange={ this.handleChange}
@@ -169,25 +205,8 @@ export default class Weather extends Component {
                   <option value="WY">Wyoming</option>
                 </select>
               </div>
-            </div>
-            <br />
-            <legend>Second Location</legend>
-            <div className="form-group well">
-              <div className="col-lg-4">
-                <input type="text"
-                        placeholder="zip code"
-                        className="form-control"
-                        onChange={ this.handleChange }
-                        name="zip2"/>
-              </div>
-              <div className="col-lg-4">
-                <input type="text"
-                        placeholder="city"
-                        className="form-control"
-                        onChange={ this.handleChange }
-                        name="city2"/>
-              </div>
-              <div className="col-lg-4">
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
                 <select className="form-control"
                     onChange={ this.handleChange}
                     name="state2" >
@@ -246,9 +265,11 @@ export default class Weather extends Component {
                   <option value="WY">Wyoming</option>
                 </select>
               </div>
+              <div className="col-lg-2" />
             </div>
+            <br />
             <hr />
-            <button className="btn btn-primary"
+            <button className="btn btn-primary btn-center"
                     type="submit"
                     form="location"
                     onClick={this.handleGetWeather}>Submit

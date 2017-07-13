@@ -54,7 +54,7 @@ export default class MapGoogle extends Component {
   render() {
     return (
       <div>
-        <button className="btn btn-primary map-button"
+        <button className="btn btn-primary btn-center"
                   onClick={this.getWeather} > Get Weather
         </button>
         <div id="map">

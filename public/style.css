@@ -99,8 +99,8 @@ button {
 	margin: 25px;
 }
 
-.weather-input{
-  display: flex;
+.headers{
+  color: #54b4eb;
   
 }
 
@@ -110,9 +110,11 @@ button {
   margin-left: 50px;
 }
 
-.map-button {
+.btn-center {
   margin-left: 45%;
   margin-bottom: 5px;
 }
+
+
 
 
