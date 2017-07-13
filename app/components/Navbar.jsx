@@ -18,18 +18,25 @@ export default class Navbar extends React.Component {
   }
 
   determineIfDisplayName = function() {
+    debugger
     return auth && auth.currentUser && auth.currentUser.displayName
       ?
         <div>Welcome {auth.currentUser.displayName} </div>
       :
-        <div>
-            <input type="text"
-                  placeholder="Enter Name"
-                  className="form-control"
-                  onChange={this.handleDisplayName}
-                  name="userName"
-                  onClick={this.handleUpdateName}/>
-        </div>
+
+        auth && auth.currentUser && auth.currentUser.isAnonymous
+
+          ?
+            <div> Welcome Guest </div>
+          :
+            <div>
+                <input type="text"
+                      placeholder="Enter Name"
+                      className="form-control"
+                      onChange={this.handleDisplayName}
+                      name="userName"
+                      onClick={this.handleUpdateName}/>
+            </div>
   }
 
   handleDisplayName = function(e) {

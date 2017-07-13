@@ -29,6 +29,9 @@ export default class extends React.Component {
       password: '',
       user: null
     }
+
+    this.emailSubmit = this.emailSubmit.bind(this)
+    this.anonSubmit = this.anonSubmit.bind(this)
   }
   componentDidMount() {
     window.loggedIn=false
@@ -39,7 +42,6 @@ export default class extends React.Component {
     this.setState({ [evt.target.id]: evt.target.value })
   }
 
-// original code before I started messing with redux
   emailSubmit = (evt) => {
     evt.preventDefault()
     if (this.state.email.length && this.state.password.length) {
@@ -56,20 +58,16 @@ export default class extends React.Component {
     }
   }
 
-  // code i need to debug
-  // emailSubmit = (evt) => {
-  //   evt.preventDefault()
-  //   if (this.state.email.length && this.state.password.length) {
-  //     this.props.login(this.state.email, this.state.password)
-  //     .then(() => {
-  //       console.log('before store.getState')
-  //       store.getState()
-  //     })
-  //     .catch(() => console.log('finally found where we are going'))
-  //   } else {
-  //     window.alert('Please fill in both your email and password')
-  //   }
-  // }
+  anonSubmit = (evt) => {
+    evt.preventDefault()
+    auth.signInAnonymously()
+      .then(() => {
+        browserHistory.push('/app')
+      })
+      .catch(function(error) {
+        window.alert(error)
+      })
+  }
 
   render() {
     // const auth = this.props.route.auth
@@ -97,11 +95,17 @@ export default class extends React.Component {
             </div>
             <div className="form-group">
               <button type="submit"
-                      className="login btn btn-primary">
+                      className="login btn btn-primary"
+                      onClick={this.emailSubmit}>
                 <img
                   id="icon"
                   src="http://www.stickpng.com/assets/images/584856bce0bb315b0f7675ad.png" alt="emailIcon" />
                 Login with Email
+              </button>
+              <button type="submit"
+                      className="login btn btn-primary"
+                      onClick={this.anonSubmit}>
+                Proceed As Guest
               </button>
             </div>
           </form>
