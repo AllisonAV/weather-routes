@@ -9,18 +9,20 @@ export default class MapGoogle extends Component {
     }
 
     this.getWeather = this.getWeather.bind(this)
+    this.clearMarkers = this.clearMarkers.bind(this)
+    this.map
+    this.markers = []
   }
 
   // tie map into component state.  Anything to rerender needs to interact to state
 
   componentDidMount() {
-    console.log('google', window.google)
     this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 40.7413549, lng: -73.9980244},
       zoom: 10
     })
     var myLatlng = new window.google.maps.LatLng(40.705189, -74.009209)
-    var marker = new window.google.maps.Marker({
+    this.markers[this.markers.length] = new window.google.maps.Marker({
       position: myLatlng
     })
     // Add the marker to the map by calling setMap()
@@ -30,7 +32,7 @@ export default class MapGoogle extends Component {
     this.map.addListener('click', e => {
       const latLng = {
         lat: e.latLng.lat(), lng: e.latLng.lng() }
-      var marker = new window.google.maps.Marker({
+      this.markers[this.markers.length] = new window.google.maps.Marker({
         position: latLng,
         map: this.map
       })
@@ -51,15 +53,36 @@ export default class MapGoogle extends Component {
     })
   }
 
+  clearMarkers = function(e) {
+    // setMapOnAll(null)
+    this.markers.forEach(marker =>
+      marker.setMap(null)
+      )
+    window.google.maps.event.trigger(this.map, 'resize')
+    this.setState({ markers: [] })
+  }
+
   render() {
     return (
       <div>
-        <button className="btn btn-primary btn-center"
+        <div className="floating-panel">
+
+          <button className="btn btn-primary"
                   onClick={this.getWeather} > Get Weather
-        </button>
+          </button>
+          <button className="btn btn-primary"
+                  onClick={this.clearMarkers} > Clear Markers
+          </button>
+        </div>
         <div id="map">
         </div>
       </div>
     )
   }
 }
+
+ /*       <button className="btn btn-primary btn-center"
+                  onClick={this.getWeather} > Get Weather
+        </button>
+
+        */
