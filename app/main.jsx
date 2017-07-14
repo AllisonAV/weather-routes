@@ -73,6 +73,17 @@ export default class LandingPage extends React.Component {
     this.unsubscribe && this.unsubscribe()
   }
 
+  anonGuest = (evt) => {
+    evt.preventDefault()
+    auth.signInAnonymously()
+      .then(() => {
+        browserHistory.push('/app')
+      })
+      .catch(function(error) {
+        window.alert(error)
+      })
+  }
+
   render() {
     return (
       <div className='jumbotron landing-container landingPageText'>
@@ -80,6 +91,10 @@ export default class LandingPage extends React.Component {
         <div className='landingPageButtons'>
           <Link to='/login'><button className='btn btn-primary landing'>Log In</button></Link>
           <Link to='/signup'><button className='btn btn-primary landing'>Sign Up</button></Link>
+          <button className='btn btn-primary landing'
+                  onClick={this.anonGuest}>
+                  Proceed As Guest
+          </button>
         </div>
       </div>
     )
