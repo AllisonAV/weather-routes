@@ -1,5 +1,6 @@
 body {
-  background: url("https://static.pexels.com/photos/27662/pexels-photo-27662.jpg") no-repeat center center fixed;
+  background: url("https://static.pexels.com/photos/514056/pexels-photo-514056.jpeg") no-repeat center center fixed;            
+ /* background: "pexels-photo-514056.jpeg" no-repeat center center fixed;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

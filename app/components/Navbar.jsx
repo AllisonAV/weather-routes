@@ -18,7 +18,6 @@ export default class Navbar extends React.Component {
   }
 
   determineIfDisplayName = function() {
-    debugger
     return auth && auth.currentUser && auth.currentUser.displayName
       ?
         <div>Welcome {auth.currentUser.displayName} </div>
@@ -82,8 +81,6 @@ export default class Navbar extends React.Component {
         <ul className="nav navbar-nav">
           <li><Link to="/map"
                     activeClassName="active-link">Map</Link></li>
-          <li><Link to="/routes"
-                    activeClassName="active-link">Create Routes</Link></li>
           <li><Link to="/routes/:id"
                     activeClassName="active-link">Your Routes</Link></li>
         </ul>
