@@ -15,53 +15,35 @@ export default class Weather extends Component {
         state1: '',
         state2: ''
       },
-      errorZip: false,
-      errorCityState: false
+      errorZip1: false,
+      errorCityState1: false,
+      errorZip2: false,
+      errorCityState2: false
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleGetWeather = this.handleGetWeather.bind(this)
   }
-    // this.removeSpacesFromCity = this.removeSpacesFromCity.bind(this)
-    // this.validateZip = this.validateZip.bind(this)
-    // this.validateCityState = this.validateCityState.bind(this)
-  //   validateZip = (zip) => {
-  //   if (zip.match(/[0-9]/) && zip.length === 5) {
-  //     return true
-  //   }
-  //   return false
-  // }
-  //   validateCityState = (city, state) => {
-  //   if ((city && !state) || (state && !city)) {
-  //     return false
-  //   }
-  //   return true
-  // }
 
 // create a function to call get Curr Temp reducer
   handleGetWeather = function(e) {
     e.preventDefault()
     let validZip = true
     let validCityState=true
-    let param1, param2
-    debugger
+    let param1, param2, error1, error2
 
-    function validateZip(zip) {
+    function validateZip(zip, group) {
       if (zip.match(/[0-9]/) && zip.length === 5) {
-        validZip = true
         return zip
       } else {
-        validZip = false
-        return ''
+        return 'zip'
       }
     }
 
-    function validateCityState(city, state) {
+    function validateCityState(city, state, group) {
       if ((city && !state) || (state && !city)) {
-        validCityState = false
-        return ''
+        return 'citystate'
       } else {
-        validCityState = true
         const city1 = removeSpacesFromCity(city)
         return `${city1}_${state}`
       }
@@ -71,6 +53,7 @@ export default class Weather extends Component {
       return city.split(' ').join('_')
     }
         // check if zip or city & state is entered
+    debugger
     if (this.state.locations.zip1) {
       param1 = validateZip(this.state.locations.zip1)
     } else {
@@ -84,21 +67,34 @@ export default class Weather extends Component {
     }
 
     debugger
-    if (validZip && validCityState) {
-      this.setState({errorZip: false})
-      this.setState({errorCityState: false})
+    if (param1 !== 'zip' && param1 !== 'citystate' &&
+        param2 !== 'zip' && param2 !== 'citystate') {
+      this.setState({errorZip1: false})
+      this.setState({errorCityState1: false})
+      this.setState({errorZip2: false})
+      this.setState({errorCityState2: false})
       this.props.getCurrTemp(param1, param2)
       .then(() => {
         store.getState()
         browserHistory.push(`/weather/${param1}/${param2}`)
       })
-    } else if (!validZip) {
-      this.setState({errorZip: true})
-      this.setState({errorCityState: false})
-    } else {
-      this.setState({errorZip: false})
-      this.setState({errorCityState: true})
     }
+
+    if (param1 === 'zip') this.setState({errorZip1: true})
+    else if (this.state.errorZip1 === true) this.setState({errorZip1: false})
+    if (param1 === 'citystate') this.setState({errorCityState1: true})
+    else if (this.state.errorCityState1 === true) this.setState({errorCityState1: false})
+    if (param2 === 'zip') this.setState({errorZip2: true})
+    else if (this.state.errorZip2 === true) this.setState({errorZip2: false})
+    if (param2 === 'citystate') this.setState({errorCityState2: true})
+    else if (this.state.errorCityState2 === true) this.setState({errorCityState2: false})
+    // } else if (!validZip) {
+    //   this.setState({errorZip: true})
+    //   this.setState({errorCityState: false})
+    // } else {
+    //   this.setState({errorZip: false})
+    //   this.setState({errorCityState: true})
+    // }
   }
 
   handleChange = function(e) {
@@ -291,6 +287,44 @@ export default class Weather extends Component {
               <div className="col-lg-2" />
             </div>
 
+            <div className="row" >
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
+              {
+              (this.state.errorZip1)
+              ?
+                  <div className="alert alert-dismissible alert-danger">
+                  <strong>Please Enter a Valid Zip Code</strong>
+                  </div>
+              : (this.state.errorCityState1)
+                ?
+                  <div className="alert alert-dismissible alert-danger">
+                  <strong>Please Enter Both City and State</strong>
+                  </div>
+                :
+                  <div />
+              }
+              </div>
+              <div className="col-lg-2" />
+              <div className="col-lg-3">
+              {
+              (this.state.errorZip2)
+              ?
+                  <div className="alert alert-dismissible alert-danger">
+                  <strong>Please Enter a Valid Zip Code</strong>
+                  </div>
+              : (this.state.errorCityState2)
+                ?
+                  <div className="alert alert-dismissible alert-danger">
+                  <strong>Please Enter Both City and State</strong>
+                  </div>
+                :
+                  <div />
+              }
+              </div>
+              <div className="col-lg-2" />
+            </div>
+
             <br />
             <hr />
 
@@ -299,43 +333,9 @@ export default class Weather extends Component {
                     form="location"
                     onClick={this.handleGetWeather}>Get Weather</button>
             <br />
-                {
-              (this.state.errorZip)
-              ?
-                  <div className="alert alert-dismissible alert-danger col-lg-3">
-                  <strong>Please Enter a Valid Zip Code</strong>
-                  </div>
-              : (this.state.errorCityState)
-                ?
-                  <div className="alert alert-dismissible alert-danger col-lg-3">
-                  <strong>Please Enter Both City and State</strong>
-                  </div>
-                :
-                  <div />
-            }
           </fieldset>
         </form>
       </div>
     )
   }
 }
-
-/*
-
-<button className="btn" type="submit" form="guest-address" onClick={this.handleSaveAndPay}>Submit</button>
-
-            <input className="btn btn-primary btn-center"
-                    type="submit"
-                    form="location"
-                    value="Submit" />
-               {
-              this.state.error
-              ? <div className="alert alert-dismissible alert-danger col-lg-2">
-                  <strong> Enter Valid Data! </strong>
-                </div>
-              : this.state.errorCityState
-                ? <div className="alert alert-dismissible alert-danger col-lg-3">
-                  <strong> Enter Both City & State! </strong>
-                </div>
-                : <div />
-            } */
