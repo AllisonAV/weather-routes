@@ -1,6 +1,8 @@
 body {
-  background: url("https://static.pexels.com/photos/514056/pexels-photo-514056.jpeg") no-repeat center center fixed;            
- /* background: "pexels-photo-514056.jpeg" no-repeat center center fixed;*/
+  /* background: url("https://static.pexels.com/photos/514056/pexels-photo-514056.jpeg") no-repeat center center fixed;   */
+  /* above uses an image from the internet.  Changed to local image below */         
+  
+  background: url("/pexels-photo-514056.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -29,6 +31,10 @@ body {
 .rightside {
   width: 25%;
   box-shadow: none;
+}
+
+.noRightPadding {
+  padding-right: 0;
 }
 
 ul {
@@ -83,8 +89,13 @@ img#icon {
 }
 
 .well {
-	margin: 0 30px 0 85px;
+	margin: 0 25px 0 25px;
   color: black;
+  padding: 0;
+}
+
+.well-sm {
+  background-color: #d9edf7;
 }
 
 .alert {
@@ -99,6 +110,7 @@ img#icon {
 button {
 	margin: 25px;
 }
+
 
 .headers{
   color: #54b4eb;
@@ -130,6 +142,41 @@ button {
   padding-left: 10px;
   margin-top: 50px;
 }
+
+
+table {
+  position: relative;
+  table-layout: fixed;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+
+tr td {
+  padding: 5px 15px;
+}
+
+th {
+  text-align: center;
+}
+
+tr th td {
+  padding: 0;
+}
+
+th img {
+  height: 70%;
+  width: 70%;
+}
+
+.well-buttons {
+  margin: 10%;
+}
+
+
 
 
 

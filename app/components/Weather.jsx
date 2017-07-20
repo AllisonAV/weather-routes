@@ -32,7 +32,7 @@ export default class Weather extends Component {
 // create a function to call get Curr Temp reducer
   handleGetWeather = function(e) {
     e.preventDefault()
-    let param1, param2, param3, param4
+    let params = []
 
     function validateZip(zip) {
       if (zip.match(/[0-9]/) && zip.length === 5) {
@@ -54,35 +54,39 @@ export default class Weather extends Component {
     function removeSpacesFromCity(city) {
       return city.split(' ').join('_')
     }
+
+    // initialize parameter array
+    params = []
         // check if zip or city & state is entered
     // input location 1
     if (this.state.locations.zip1) {
-      param1 = validateZip(this.state.locations.zip1)
-    } else {
-      param1 = validateCityState(this.state.locations.city1, this.state.locations.state1)
+      params.push(validateZip(this.state.locations.zip1))
+    } else if (this.state.locations.city1 || this.state.locations.state1) {
+      params.push(validateCityState(this.state.locations.city1, this.state.locations.state1))
     }
     // input location 2
     if (this.state.locations.zip2) {
-      param2 = validateZip(this.state.locations.zip2)
-    } else {
-      param2 = validateCityState(this.state.locations.city2, this.state.locations.state2)
+      params.push(validateZip(this.state.locations.zip2))
+    } else if (this.state.locations.city2 || this.state.locations.state2) {
+      params.push(validateCityState(this.state.locations.city2, this.state.locations.state2))
     }
     // input location 3
     if (this.state.locations.zip3) {
-      param3 = validateZip(this.state.locations.zip3)
-    } else {
-      param3 = validateCityState(this.state.locations.city3, this.state.locations.state3)
+      params.push(validateZip(this.state.locations.zip3))
+    } else if (this.state.locations.city3 || this.state.locations.state3) {
+      params.push(validateCityState(this.state.locations.city3, this.state.locations.state3))
     }
     // input location 4
     if (this.state.locations.zip4) {
-      param4 = validateZip(this.state.locations.zip4)
-    } else {
-      param4 = validateCityState(this.state.locations.city4, this.state.locations.state4)
+      params.push(validateZip(this.state.locations.zip4))
+    } else if (this.state.locations.city4 || this.state.locations.state4) {
+      params.push(validateCityState(this.state.locations.city4, this.state.locations.state4))
     }
-    if (param1 !== 'zip' && param1 !== 'citystate' &&
-        param2 !== 'zip' && param2 !== 'citystate' &&
-        param3 !== 'zip' && param3 !== 'citystate' &&
-        param4 !== 'zip' && param4 !== 'citystate') {
+    const index1 = params.findIndex(el => { if (el === 'zip') return false })
+    const index2 = params.findIndex(el => { if (el === 'citystate') return false })
+    debugger
+    if (index1 === -1 &&
+        index2 === -1) {
       this.setState({errorZip1: false})
       this.setState({errorCityState1: false})
       this.setState({errorZip2: false})
@@ -91,31 +95,31 @@ export default class Weather extends Component {
       this.setState({errorCityState3: false})
       this.setState({errorZip4: false})
       this.setState({errorCityState4: false})
-      this.props.getCurrTemp(param1, param2)
+      this.props.getCurrTemp(params[0], params[1])
       .then(() => {
         store.getState()
-        browserHistory.push(`/weather/${param1}/${param2}`)
+        browserHistory.push(`/weather/${params[0]}/${params[1]}`)
       })
     }
 // set state error flags for input 1
-    if (param1 === 'zip') this.setState({errorZip1: true})
+    if (params[0] === 'zip') this.setState({errorZip1: true})
     else if (this.state.errorZip1 === true) this.setState({errorZip1: false})
-    if (param1 === 'citystate') this.setState({errorCityState1: true})
+    if (params[0] === 'citystate') this.setState({errorCityState1: true})
     else if (this.state.errorCityState1 === true) this.setState({errorCityState1: false})
 // set state error flags for input 2
-    if (param2 === 'zip') this.setState({errorZip2: true})
+    if (params[1] === 'zip') this.setState({errorZip2: true})
     else if (this.state.errorZip2 === true) this.setState({errorZip2: false})
-    if (param2 === 'citystate') this.setState({errorCityState2: true})
+    if (params[1] === 'citystate') this.setState({errorCityState2: true})
     else if (this.state.errorCityState2 === true) this.setState({errorCityState2: false})
 // set state error flags for input 3
-    if (param3 === 'zip') this.setState({errorZip3: true})
+    if (params[2] === 'zip') this.setState({errorZip3: true})
     else if (this.state.errorZip3 === true) this.setState({errorZip3: false})
-    if (param3 === 'citystate') this.setState({errorCityState3: true})
+    if (params[2] === 'citystate') this.setState({errorCityState3: true})
     else if (this.state.errorCityState3 === true) this.setState({errorCityState3: false})
 // set state error flags for input 4
-    if (param4 === 'zip') this.setState({errorZip4: true})
+    if (params[3] === 'zip') this.setState({errorZip4: true})
     else if (this.state.errorZip4 === true) this.setState({errorZip4: false})
-    if (param4 === 'citystate') this.setState({errorCityState4: true})
+    if (params[3] === 'citystate') this.setState({errorCityState4: true})
     else if (this.state.errorCityState4 === true) this.setState({errorCityState4: false})
   }
 

@@ -39,6 +39,7 @@ export default class extends React.Component {
   }
 
   setEmailPassword = (evt) => {
+    evt.preventDefault()
     this.setState({ [evt.target.id]: evt.target.value })
   }
 
@@ -70,7 +71,6 @@ export default class extends React.Component {
   }
 
   render() {
-    // const auth = this.props.route.auth
     const auth = firebase.auth()
     const email = new firebase.auth.EmailAuthProvider()
 
