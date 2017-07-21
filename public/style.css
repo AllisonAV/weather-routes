@@ -176,6 +176,16 @@ th img {
   margin: 10%;
 }
 
+.location-container {
+  border: 1px solid gray !important;
+  display: inline-block;
+  background-color: #2FA4E7;
+  overflow-y: scroll;
+  border-radius: 50%; 
+  margin: 25px;
+
+}
+
 
 
 

@@ -81,7 +81,7 @@ export default class Navbar extends React.Component {
         <ul className="nav navbar-nav">
           <li><Link to="/map"
                     activeClassName="active-link">Map</Link></li>
-          <li><Link to="/routes/:id"
+          <li><Link to={`/locations/:${auth.currentUser.uid}`}
                     activeClassName="active-link">Your Routes</Link></li>
         </ul>
     </div>
