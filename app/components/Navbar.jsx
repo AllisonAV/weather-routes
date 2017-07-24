@@ -4,17 +4,30 @@ import firebase from 'APP/fire'
 import store from '../store'
 const auth = firebase.auth()
 
+
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state={
       user: '',
-      displayName: ''
+      displayName: '',
+      userId: ''
     }
 
     this.handleDisplayName = this.handleDisplayName.bind(this)
     this.handleUpdateName = this.handleUpdateName.bind(this)
     this.determineIfDisplayName = this.determineIfDisplayName.bind(this)
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log('component DID mount', user)
+      if (user) {
+        this.setState({userId: user.uid})
+      } else {
+        this.setState({userId: 'guest'})
+      }
+    })
   }
 
   determineIfDisplayName = function() {
@@ -59,6 +72,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
+    debugger
     return (
 
 <nav className="nav navbar-default navbar-fixed-top">
@@ -81,7 +95,7 @@ export default class Navbar extends React.Component {
         <ul className="nav navbar-nav">
           <li><Link to="/map"
                     activeClassName="active-link">Map</Link></li>
-          <li><Link to={`/locations/:${auth.currentUser.uid}`}
+          <li><Link to={`/locations/:${this.state.userId}`}
                     activeClassName="active-link">Your Routes</Link></li>
         </ul>
     </div>
