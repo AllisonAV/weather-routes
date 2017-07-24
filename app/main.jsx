@@ -85,6 +85,8 @@ export default class LandingPage extends React.Component {
       })
   }
 
+
+
   render() {
     return (
       <div className='jumbotron landing-container landingPageText'>
@@ -105,6 +107,21 @@ export default class LandingPage extends React.Component {
 const onWeatherLocationEnter = (nextRouterState) => {
   store.getState()
 }
+
+// const onAppEnter = (userId, replace, next) => {
+//   setTimeout(() => {
+//     unsubscribe()
+//     replace('/login?' + userId)
+//     next()
+//   }, 300)
+//   const unsubscribe = auth.onAuthStateChanged(user => {
+//     // console.log('LandingPage COMPONENT_WILL_MOUNT, USER: ', user)
+//     if (user) {
+//       unsubscribe()
+//       next()
+//     }
+//   })
+// }
 
 render(
   <Provider store={store}>

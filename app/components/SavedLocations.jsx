@@ -18,12 +18,14 @@ export default class SavedLocations extends Component {
   }
 
   receiveData = () => {
-    const ref = db.ref('locations/' + auth.currentUser.uid)
-    ref.once('value')
-    .then(snapshot => {
-      this.setState({data: snapshot.val()})
-    })
-    .catch(error => console.log(error))
+    if (auth && auth.currentUser) {
+      const ref = db.ref('locations/' + auth.currentUser.uid)
+      ref.once('value')
+      .then(snapshot => {
+        this.setState({data: snapshot.val()})
+      })
+      .catch(error => console.log(error))
+    }
   }
 
   render() {
@@ -31,10 +33,14 @@ export default class SavedLocations extends Component {
       <div>
         {this.state.data && Object.keys(this.state.data).map(key => {
           return (
-            <div key={key} className="location-container">
+            <div key={key}>
 
               <div>Location 1: {this.state.data[key].location1}</div>
               <div>Location 2:{this.state.data[key].location2}</div>
+              <div><button
+                  >Weather
+                  </button>
+              </div>
               <hr />
             </div>
           )
