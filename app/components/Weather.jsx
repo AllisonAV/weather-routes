@@ -4,7 +4,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../store'
 
 export default class Weather extends Component {
-  constructor(props) {
+  constructor(props) { 
     super(props)
     this.state = {
       locations: {
@@ -84,7 +84,6 @@ export default class Weather extends Component {
     }
     const index1 = params.findIndex(el => { if (el === 'zip') return false })
     const index2 = params.findIndex(el => { if (el === 'citystate') return false })
-    debugger
     if (index1 === -1 &&
         index2 === -1) {
       this.setState({errorZip1: false})
