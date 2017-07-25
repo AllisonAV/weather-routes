@@ -21,7 +21,6 @@ export default class Navbar extends React.Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log('component DID mount', user)
       if (user) {
         this.setState({userId: user.uid})
       } else {
@@ -72,7 +71,6 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    debugger
     return (
 
 <nav className="nav navbar-default navbar-fixed-top">
