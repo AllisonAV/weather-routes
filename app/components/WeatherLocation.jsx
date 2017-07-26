@@ -46,7 +46,6 @@ export default class WeatherLocation extends Component {
   }
 
   saveData = () => {
-    debugger
     let route1, route2, route3, route4, loc1, loc2, loc3, loc4
     if (!this.props.params.location1) {
       route1 = 'empty'
