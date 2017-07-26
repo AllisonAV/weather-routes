@@ -77,14 +77,6 @@ export default class Weather extends Component {
             ref.child(auth.currentUser.uid).remove()
           })
         })
-          // if (snapshot.val().userId === auth.currentUser.uid) {
-          //   console.log('in if', snapshot.val().key)
-          //   this.props.getCurrTemp(snapshot.val().param1, snapshot.val().param2)
-          //   .then(() => {
-          //     store.getState()
-          //     browserHistory.push(`/weather/${snapshot.val().param1}/${snapshot.val().param2}`)
-          //   })
-          // }
       })
     }
 

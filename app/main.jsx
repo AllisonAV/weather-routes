@@ -16,7 +16,7 @@ import SignUp from './components/SignUp'
 // import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 
-import SavedLocations from './components/SavedLocations'
+import SavedLocationsContainer from './containers/SavedLocationsContainer'
 import WeatherContainer from './containers/WeatherContainer'
 import MapGoogleContainer from './containers/MapGoogleContainer'
 import WeatherLocationContainer from './containers/WeatherLocationContainer'
@@ -135,7 +135,7 @@ render(
         <Route path="/weather/:location1/:location2"
                 component={WeatherLocationContainer}
                 onEnter={onWeatherLocationEnter} />
-        <Route path="/locations/:userId" component={SavedLocations} />
+        <Route path="/locations/:userId" component={SavedLocationsContainer} />
         <Route path="/map" component={MapGoogleContainer} />
         <Route path="/*" component={AppContainer} />
       </Route>
