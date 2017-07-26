@@ -79,11 +79,9 @@ export default class WeatherLocation extends Component {
     locationsRef.once('value')
     .then((snapshot) => {
       if (snapshot.val() === null) {
+        const theParams = `${route1}|${route2}|${route3}|${route4}`
         locationsRef.set({
-          routeParam1: route1,
-          routeParam2: route2,
-          routeParam3: route3,
-          routeParam4: route4,
+          routeParams: theParams,
           location1: loc1,
           location2: loc2,
           location3: loc3,
