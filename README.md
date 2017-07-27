@@ -12,7 +12,7 @@ Have you ever need to see weather in multiple locations at once? Weather Routes 
 Entering locations is easy and can be done in two ways
 <ol>
 <li>Enter zipcode or city and state on the main page</li>
-<li>Pick two locations on google maps</li>
+<li>Pick up to four locations on google maps</li>
 </ol>
 
 For logged in users, the locations can be saved and referenced for future uses.  This could be useful to see the weather at places frequented, such as bike routes, or multiple beach towns on the same screen
