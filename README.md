@@ -3,7 +3,7 @@ Created by Allison Alexander
 
 <h4>Technologies</h4>
 
-This application was created using React, React-Redux, and Firebaase, along with APIs from Weather Underground and Google Maps.
+This application was created using React, React-Redux, and Firebase, along with APIs from Weather Underground and Google Maps.
 
 <h4>Current Functionality</h4>
 
