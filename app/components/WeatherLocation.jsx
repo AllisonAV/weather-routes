@@ -1,6 +1,8 @@
+
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
 import firebase from 'APP/fire'
+import store from '../store'
 const auth = firebase.auth()
 const db = firebase.database()
 
@@ -10,7 +12,13 @@ export default class WeatherLocation extends Component {
     this.state = {
       celsius: false,
       locationName: '',
-      locationExists: false
+      locationExists: false,
+      showHourly1: false,
+      showHourly2: false,
+      hourly1: [],
+      hourly2: [],
+      hourly3: [],
+      houry4: []
     }
 
     this.changeUnits = this.changeUnits.bind(this)
@@ -18,6 +26,14 @@ export default class WeatherLocation extends Component {
     this.showModal = this.showModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.showHourly = this.showHourly.bind(this)
+  }
+
+  handleChange = (e) => {
+    e.preventDefault()
+    this.setState({
+      locationName: e.target.value
+    })
   }
 
   changeUnits = () => {
@@ -38,11 +54,35 @@ export default class WeatherLocation extends Component {
     document.getElementById('saveLocationModal').style.display = 'none'
   }
 
-  handleChange = (e) => {
-    e.preventDefault()
-    this.setState({
-      locationName: e.target.value
-    })
+  showHourly = (e) => {
+    const whichWell = e.target.getAttribute('data-item')
+    let param
+
+    switch (whichWell) {
+    case '1':
+      param = this.props.routeParams.location1
+      break
+    case '2':
+      param = this.props.routeParams.location2
+      break
+    }
+
+    this.props.getHourly(param)
+      .then(() => {
+        store.getState()
+      })
+      .then(() => {
+        switch (whichWell) {
+        case '1':
+          this.setState({hourly1: this.props.hourlyData.hourly})
+          this.setState({showHourly1: true})
+          break
+        case '2':
+          this.setState({hourly2: this.props.hourlyData.hourly})
+          this.setState({showHourly2: true})
+          break
+        }
+      })
   }
 
   saveData = () => {
@@ -181,24 +221,40 @@ export default class WeatherLocation extends Component {
                     </tr>
                   }
                   <tr className="info">
-                    <td colSpan='3'>Next 8 hours</td>
+                    <td colSpan='3'>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        data-item="1"
+                        onClick={this.showHourly}>Next 8 hours
+                      </button>
+                    </td>
                   </tr>
-                    {this.props.currData.hourly1.map((hour, index) =>
-                      <tr key={index}>
-                      { index<8
-                        ? <div>
-                            <td>{hour.FCTTIME.civil}</td>
-                            <td><img src={hour.icon_url}/></td>
-                            {this.state.celsius
-                            ? <td>{hour.temp.metric}&#8451;</td>
-                            : <td>{hour.temp.english}&#8457;</td> }
-                          </div>
-                        : <div></div>
+
+               {
+                this.state.showHourly1
+                ?
+                this.state.hourly1.map((hour, index) =>
+                <tr key={index}>
+                  { index<8
+                  ?
+                    <div>
+                      <td>{hour.FCTTIME.civil}</td>
+                      <td> <img src={hour.icon_url}/></td>
+                      {this.state.celsius
+                      ? <td> {hour.temp.metric}&#8451;</td>
+                      : <td>{hour.temp.english}&#8457;</td>
                       }
-                      </tr>
-                      )
-                    }
-              </tbody>
+                    </div>
+                  :
+                    <div />
+                  }
+                </tr>
+                )
+                :
+                  <tr></tr>
+              }
+            </tbody>
           </table>
           </div>
           <div className="well col-lg-2">
@@ -228,10 +284,50 @@ export default class WeatherLocation extends Component {
                       <td colSpan='2'>Wind from {this.props.currData.windDir2}</td>
                       <td className="noRightPadding">{this.props.currData.windMph2} MPH</td>
                     </tr> }
-                  <tr className="info">
-                    <td colSpan='3'>Next 8 hours</td>
+                    <tr className="info">
+                    <td colSpan='3'>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        data-item="2"
+                        onClick={this.showHourly}>Next 8 hours
+                      </button>
+                    </td>
                   </tr>
-                    {this.props.currData.hourly2.map((hour, index) =>
+
+               {
+                this.state.showHourly2
+                ?
+                this.state.hourly2.map((hour, index) =>
+                <tr key={index}>
+                  { index<8
+                  ?
+                    <div>
+                      <td>{hour.FCTTIME.civil}</td>
+                      <td> <img src={hour.icon_url}/></td>
+                      {this.state.celsius
+                      ? <td> {hour.temp.metric}&#8451;</td>
+                      : <td>{hour.temp.english}&#8457;</td>
+                      }
+                    </div>
+                  :
+                    <div />
+                  }
+                </tr>
+                )
+                :
+                  <tr></tr>
+              }
+              </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+/*                    {this.props.currData.hourly2.map((hour, index) =>
                       <tr key={index}>
                       { index<8
                         ? <div>
@@ -247,12 +343,14 @@ export default class WeatherLocation extends Component {
                       </tr>
                       )
                     }
+*/
 
-              </tbody>
-          </table>
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
+/*
+                    <div>
+                      <td>{hour.FCTTIME.civil}</td>
+                      <td><img src={hour.icon_url}/></td>
+                      {this.state.celsius
+                      ? <td>{hour.temp.metric}&#8451;</td>
+                      : <td>{hour.temp.english}&#8457;</td> }
+                    </div>
+*/
