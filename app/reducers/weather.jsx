@@ -8,6 +8,7 @@ const initialState = {
 
 // ------------ Weather Constants -----------
 const GOT_CURRTEMP = 'GOT_CURRTEMP'
+const GOT_HOURLY = 'GOT_HOURLY'
 
 // ------------ Weather Dispatchers -----------
 export const getCurrTemp = (param1, param2) =>
@@ -15,16 +16,14 @@ export const getCurrTemp = (param1, param2) =>
     Promise.all([
       axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${param1}.json`),
       axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${param2}.json`),
-      axios.get(`http://api.wunderground.com/api/${keyWU}/hourly/q/${param1}.json`),
-      axios.get(`http://api.wunderground.com/api/${keyWU}/hourly/q/${param2}.json`)
+      // axios.get(`http://api.wunderground.com/api/${keyWU}/hourly/q/${param1}.json`),
+      // axios.get(`http://api.wunderground.com/api/${keyWU}/hourly/q/${param2}.json`)
     ])
-    .spread((weatherData1, weatherData2, hourly1, hourly2) => {
+    // .spread((weatherData1, weatherData2, hourly1, hourly2) => {
+    .spread((weatherData1, weatherData2) => {
       let currData = {}
-
       if (weatherData1.data.response.error ||
-        weatherData2.data.response.error ||
-        hourly1.data.response.error ||
-        hourly2.error) {
+          weatherData2.data.response.error) {
         currData = {error: 'Invalid Location'}
       } else {
         currData = {
@@ -40,15 +39,29 @@ export const getCurrTemp = (param1, param2) =>
           location2: weatherData2.data.current_observation.display_location.full,
           weather1: weatherData1.data.current_observation.weather,
           weather2: weatherData2.data.current_observation.weather,
-          windDir1: weatherData2.data.current_observation.wind_dir,
+          windDir1: weatherData1.data.current_observation.wind_dir,
           windDir2: weatherData2.data.current_observation.wind_dir,
-          icon1: weatherData2.data.current_observation.icon_url,
-          icon2: weatherData2.data.current_observation.icon_url,
-          hourly1: hourly1.data.hourly_forecast,
-          hourly2: hourly2.data.hourly_forecast
+          icon1: weatherData1.data.current_observation.icon_url,
+          icon2: weatherData2.data.current_observation.icon_url
         }
       }
       return dispatch(gotCurrTemp(currData))
+    })
+    .catch(err => console.error(err))
+
+export const getHourly = (param) =>
+  dispatch =>
+    axios.get(`http://api.wunderground.com/api/${keyWU}/hourly/q/${param}.json`)
+    .then((weatherData) => {
+      let hourlyData = {}
+      if (weatherData.data.response.error) {
+        hourlyData = {error: 'Invalid Location'}
+      } else {
+        hourlyData = {
+          hourly: weatherData.data.hourly_forecast
+        }
+      }
+      return dispatch(gotHourly(hourlyData))
     })
     .catch(err => console.error(err))
 
@@ -60,6 +73,11 @@ export const gotCurrTemp = currData => ({
   currData
 })
 
+export const gotHourly = hourlyData => ({
+  type: GOT_HOURLY,
+  hourlyData
+})
+
 // ------------ Weather Reducers -----------
 const reducer = (state=initialState, action) => {
   const newState = Object.assign({}, state)
@@ -67,6 +85,9 @@ const reducer = (state=initialState, action) => {
   switch (action.type) {
   case GOT_CURRTEMP:
     newState.currData = action.currData
+    break
+  case GOT_HOURLY:
+    newState.hourlyData = action.hourlyData
     break
   }
   return newState
