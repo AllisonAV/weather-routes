@@ -132,7 +132,16 @@ render(
       <Route path="/app" component={AppContainer} >
         <IndexRedirect to="/weather" />
         <Route path="/weather" component={WeatherContainer} />
+        <Route path="/weather/:location1/"
+                component={WeatherLocationContainer}
+                onEnter={onWeatherLocationEnter} />
         <Route path="/weather/:location1/:location2"
+                component={WeatherLocationContainer}
+                onEnter={onWeatherLocationEnter} />
+        <Route path="/weather/:location1/:location2/:location3"
+                component={WeatherLocationContainer}
+                onEnter={onWeatherLocationEnter} />
+        <Route path="/weather/:location1/:location2/:location3/:location4"
                 component={WeatherLocationContainer}
                 onEnter={onWeatherLocationEnter} />
         <Route path="/locations/:userId" component={SavedLocationsContainer} />
