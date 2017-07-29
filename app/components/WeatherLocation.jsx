@@ -15,10 +15,12 @@ export default class WeatherLocation extends Component {
       locationExists: false,
       showHourly1: false,
       showHourly2: false,
+      showHourly3: false,
+      showHourly4: false,
       hourly1: [],
       hourly2: [],
       hourly3: [],
-      houry4: []
+      hourly4: []
     }
 
     this.changeUnits = this.changeUnits.bind(this)
@@ -57,13 +59,19 @@ export default class WeatherLocation extends Component {
   showHourly = (e) => {
     const whichWell = e.target.getAttribute('data-item')
     let param
-
+    debugger
     switch (whichWell) {
     case '1':
       param = this.props.routeParams.location1
       break
     case '2':
       param = this.props.routeParams.location2
+      break
+    case '3':
+      param = this.props.routeParams.location3
+      break
+    case '4':
+      param = this.props.routeParams.location4
       break
     }
 
@@ -80,6 +88,14 @@ export default class WeatherLocation extends Component {
         case '2':
           this.setState({hourly2: this.props.hourlyData.hourly})
           this.setState({showHourly2: true})
+          break
+        case '3':
+          this.setState({hourly3: this.props.hourlyData.hourly})
+          this.setState({showHourly3: true})
+          break
+        case '4':
+          this.setState({hourly4: this.props.hourlyData.hourly})
+          this.setState({showHourly4: true})
           break
         }
       })
@@ -192,6 +208,7 @@ export default class WeatherLocation extends Component {
                     onClick={this.showModal} > Save
             </button>
         </div>
+{/* LOCATION 1 */}
           <div className="well col-lg-2">
             <table className="table table-striped table-hover">
             <thead>
@@ -212,8 +229,8 @@ export default class WeatherLocation extends Component {
               <tbody>
                 { this.state.celsius
                   ? <tr>
-                      <td>Wind from {this.props.currData.windDir1}</td>
-                      <td colSpan='2'>{ this.props.currData.windKph1} KPH</td>
+                      <td colSpan='2'>Wind from {this.props.currData.windDir1}</td>
+                      <td>{ this.props.currData.windKph1} KPH</td>
                     </tr>
                   : <tr>
                       <td colSpan='2'>Wind from {this.props.currData.windDir1}</td>
@@ -257,6 +274,9 @@ export default class WeatherLocation extends Component {
             </tbody>
           </table>
           </div>
+{/* LOCATION 2 */}
+          {this.props.currData.location2
+          ?
           <div className="well col-lg-2">
             <table className="table table-striped table-hover ">
             <thead>
@@ -283,18 +303,18 @@ export default class WeatherLocation extends Component {
                   : <tr>
                       <td colSpan='2'>Wind from {this.props.currData.windDir2}</td>
                       <td className="noRightPadding">{this.props.currData.windMph2} MPH</td>
-                    </tr> }
-                    <tr className="info">
-                    <td colSpan='3'>
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        data-item="2"
-                        onClick={this.showHourly}>Next 8 hours
-                      </button>
-                    </td>
-                  </tr>
-
+                    </tr>
+                }
+                <tr className="info">
+                  <td colSpan='3'>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-item="2"
+                      onClick={this.showHourly}>Next 8 hours
+                    </button>
+                  </td>
+                </tr>
                {
                 this.state.showHourly2
                 ?
@@ -321,36 +341,152 @@ export default class WeatherLocation extends Component {
               </tbody>
           </table>
           </div>
+          :
+            <div />
+          }
+{/* LOCATION 3 */}
+          { this.props.currData.location3
+          ?
+          <div className="well col-lg-2">
+            <table className="table table-striped table-hover ">
+            <thead>
+              <tr className="info">
+                <th colSpan='3'>{ this.props.currData.location3 } </th>
+              </tr>
+              <tr className="info">
+                <th> <img src={this.props.currData.icon3}/></th>
+                <th>
+                  { this.state.celsius
+                  ? <div>{ this.props.currData.currTempC3 }&#8451;</div>
+                  : <div>{this.props.currData.currTemp3 } &#8457;</div>
+                  }
+                </th>
+                <th />
+              </tr>
+            </thead>
+              <tbody>
+                { this.state.celsius
+                  ? <tr>
+                      <td colSpan='2'>Wind from {this.props.currData.windDir3}</td>
+                      <td>{ this.props.currData.windKph3} KPH</td>
+                    </tr>
+                  : <tr>
+                      <td colSpan='2'>Wind from {this.props.currData.windDir3}</td>
+                      <td className="noRightPadding">{this.props.currData.windMph3} MPH</td>
+                    </tr>
+                }
+                <tr className="info">
+                  <td colSpan='3'>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-item="3"
+                      onClick={this.showHourly}>Next 8 hours
+                    </button>
+                  </td>
+                </tr>
+
+               {
+                this.state.showHourly3
+                ?
+                this.state.hourly3.map((hour, index) =>
+                <tr key={index}>
+                  { index<8
+                  ?
+                    <div>
+                      <td>{hour.FCTTIME.civil}</td>
+                      <td> <img src={hour.icon_url}/></td>
+                      {this.state.celsius
+                      ? <td> {hour.temp.metric}&#8451;</td>
+                      : <td>{hour.temp.english}&#8457;</td>
+                      }
+                    </div>
+                  :
+                    <div />
+                  }
+                </tr>
+                )
+                :
+                  <tr></tr>
+              }
+              </tbody>
+          </table>
+          </div>
+          :
+            <div />
+          }
+{/* LOCATION 4 */}
+          {this.props.currData.location4
+          ?
+          <div className="well col-lg-2">
+            <table className="table table-striped table-hover ">
+            <thead>
+              <tr className="info">
+                <th colSpan='3'>{ this.props.currData.location4 } </th>
+              </tr>
+              <tr className="info">
+                <th> <img src={this.props.currData.icon4}/></th>
+                <th>
+                  { this.state.celsius
+                  ? <div>{ this.props.currData.currTempC4 }&#8451;</div>
+                  : <div>{this.props.currData.currTemp4 } &#8457;</div>
+                  }
+                </th>
+                <th />
+              </tr>
+            </thead>
+              <tbody>
+                { this.state.celsius
+                  ? <tr>
+                      <td colSpan='2'>Wind from {this.props.currData.windDir4}</td>
+                      <td>{ this.props.currData.windKph4} KPH</td>
+                    </tr>
+                  : <tr>
+                      <td colSpan='2'>Wind from {this.props.currData.windDir4}</td>
+                      <td className="noRightPadding">{this.props.currData.windMph4} MPH</td>
+                    </tr> }
+                    <tr className="info">
+                    <td colSpan='3'>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        data-item="4"
+                        onClick={this.showHourly}>Next 8 hours
+                      </button>
+                    </td>
+                  </tr>
+
+               {
+                this.state.showHourly4
+                ?
+                this.state.hourly4.map((hour, index) =>
+                <tr key={index}>
+                  { index<8
+                  ?
+                    <div>
+                      <td>{hour.FCTTIME.civil}</td>
+                      <td> <img src={hour.icon_url}/></td>
+                      {this.state.celsius
+                      ? <td> {hour.temp.metric}&#8451;</td>
+                      : <td>{hour.temp.english}&#8457;</td>
+                      }
+                    </div>
+                  :
+                    <div />
+                  }
+                </tr>
+                )
+                :
+                  <tr></tr>
+              }
+              </tbody>
+          </table>
+          </div>
+        :
+          <div />
+        }
         </div>
       </div>
     )
   }
 }
-
-/*                    {this.props.currData.hourly2.map((hour, index) =>
-                      <tr key={index}>
-                      { index<8
-                        ? <div>
-                            <td>{hour.FCTTIME.civil}</td>
-                            <td> <img src={hour.icon_url}/></td>
-                            {this.state.celsius
-                            ? <td> {hour.temp.metric}&#8451;</td>
-                            : <td>{hour.temp.english}&#8457;</td>
-                            }
-                          </div>
-                        : <div></div>
-                      }
-                      </tr>
-                      )
-                    }
-*/
-
-/*
-                    <div>
-                      <td>{hour.FCTTIME.civil}</td>
-                      <td><img src={hour.icon_url}/></td>
-                      {this.state.celsius
-                      ? <td>{hour.temp.metric}&#8451;</td>
-                      : <td>{hour.temp.english}&#8457;</td> }
-                    </div>
-*/

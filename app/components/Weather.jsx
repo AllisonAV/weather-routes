@@ -13,10 +13,16 @@ export default class Weather extends Component {
       locations: {
         zip1: '',
         zip2: '',
+        zip3: '',
+        zip4: '',
         city1: '',
         city2: '',
+        city3: '',
+        city4: '',
         state1: '',
-        state2: ''
+        state2: '',
+        state3: '',
+        state4: ''
       },
       errorZip1: false,
       errorCityState1: false,
@@ -25,7 +31,7 @@ export default class Weather extends Component {
       errorZip3: false,
       errorCityState3: false,
       errorZip4: false,
-      errorCityState4: false 
+      errorCityState4: false
       // waitToSendData: false
     }
 
@@ -37,56 +43,6 @@ export default class Weather extends Component {
   handleGetWeather = function(e) {
     e.preventDefault()
     let params = []
-    // let waitToSendData = false
-
-    // const sendParmsToQueue = () => {
-    //   debugger
-    //   let ref = db.ref('apiQueue')
-    //   // see if there is an object in the queue
-    //   ref.once('value', snapshot => {
-    //     if (snapshot.numChildren() > 0) {
-    //       this.setState({waitToSendData: true})
-    //       waitToSendData = true
-    //     } else {
-    //       ref = db.ref('apiQueue/' + auth.currentUser.uid)
-    //       ref.set({
-    //         param1: params[0],
-    //         param2: params[1],
-    //         param3: params[2],
-    //         param4: params[3]
-    //       })
-    //     }
-    //   })
-    // }
-
-    // const retrieveData = () => {
-    //   // Attach an asynchronous callback to read the data in the apiQueue
-    //   // Loop through data in queue with the forEach() method. The callback
-    //   // provided to forEach() will be called synchronously with a DataSnapshot
-    //   // for each child:
-    //   const ref = db.ref('apiQueue')
-    //   // query = ref.orderByKey().limitToFirst(1)
-    //   ref.once('value', snapshot => {
-    //     snapshot.forEach(child => {
-    //       this.props.getCurrTemp(child.val().param1, child.val().param2)
-    //       .then(() => {
-    //         store.getState()
-    //         browserHistory.push(`/weather/${child.val().param1}/${child.val().param2}`)
-    //       })
-    //       .then(() => {
-    //         ref.child(auth.currentUser.uid).remove()
-    //       })
-    //     })
-    //       // if (snapshot.val().userId === auth.currentUser.uid) {
-    //       //   console.log('in if', snapshot.val().key)
-    //       //   this.props.getCurrTemp(snapshot.val().param1, snapshot.val().param2)
-    //       //   .then(() => {
-    //       //     store.getState()
-    //       //     browserHistory.push(`/weather/${snapshot.val().param1}/${snapshot.val().param2}`)
-    //       //   })
-    //       // }
-    //   })
-    // }
 
     function validateZip(zip) {
       if (zip.match(/[0-9]/) && zip.length === 5) {
@@ -150,33 +106,41 @@ export default class Weather extends Component {
       this.setState({errorCityState4: false})
 
       // if all 4 locations are not used, enter in placeholder data for unused parameters
-      if (params.length === 1) params.push('empty')
-      if (params.length === 2) params.push('empty')
-      if (params.length === 3) params.push('empty')
-
-      // create an entry in the apiQueue, which will be used
-      // to ensure the key is not used more than 10 times a minute
-      // sendParmsToQueue()
-      // retreive the data from the queue, and get the weather
-      // if (waitToSendData === false) {
-      //   setTimeout(retrieveData, 5000)
-      // } else {
-      // reset waitToSendData so user can resubmit the form
-      // use a local variable along with state, since setState is async
-        // waitToSendData = false
-        // this.setState({waitToSendData: false})
-      this.props.getCurrTemp(params[0], params[1])
-      .then(() => {
-        store.getState()
-        browserHistory.push(`/weather/${params[0]}/${params[1]}`)
-      })
+      // if (params.length === 1) params.push('empty')
+      // if (params.length === 2) params.push('empty')
+      // if (params.length === 3) params.push('empty')
+      switch (params.length) {
+      case 1 :
+        this.props.getCurrTemp1(params)
+        .then(() => {
+          store.getState()
+          browserHistory.push(`/weather/${params[0]}`)
+        })
+        break
+      case 2 :
+        this.props.getCurrTemp2(params)
+        .then(() => {
+          store.getState()
+          browserHistory.push(`/weather/${params[0]}/${params[1]}`)
+        })
+        break
+      case 3 :
+        this.props.getCurrTemp3(params)
+        .then(() => {
+          store.getState()
+          browserHistory.push(`/weather/${params[0]}/${params[1]}/${params[2]}`)
+        })
+        break
+      case 4 :
+        this.props.getCurrTemp4(params)
+        .then(() => {
+          store.getState()
+          browserHistory.push(`/weather/${params[0]}/${params[1]}/${params[2]}/${params[3]}`)
+        })
+        break
+      }
+       // browserHistory.push(`/weather/${params[0]}/${params[1]}`)
     }
-      // comment out for test  ** Moved to retrieveData function
-      // this.props.getCurrTemp(params[0], params[1])
-      // .then(() => {
-      //   store.getState()
-      //   browserHistory.push(`/weather/${params[0]}/${params[1]}`)
-      // })
 // set state error flags for input 1
     if (params[0] === 'zip') this.setState({errorZip1: true})
     else if (this.state.errorZip1 === true) this.setState({errorZip1: false})
