@@ -39,7 +39,14 @@ export default class SavedLocations extends Component {
     .filter(param =>
       param !== 'empty'
       )
-    debugger
+
+    db.ref(`usage/${Date()} API Calls:${params.length}`).set({
+      name: auth.currentUser.displayName || 'Guest',
+      userId: auth.currentUser.uid,
+      route: params.join('|'),
+      type: 'Current Data - Saved Locations'
+    })
+
     switch (params.length) {
     case 1:
       this.props.getCurrTemp1(params)
