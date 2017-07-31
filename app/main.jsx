@@ -104,7 +104,6 @@ export default class LandingPage extends React.Component {
 
 const onWeatherLocationEnter = (nextRouterState) => {
   store.getState()
-  debugger
 }
 
 // const onAppEnter = (userId, replace, next) => {

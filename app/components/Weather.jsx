@@ -105,6 +105,13 @@ export default class Weather extends Component {
       this.setState({errorZip4: false})
       this.setState({errorCityState4: false})
 
+      db.ref(`usage/${Date()} API Calls:${params.length}`).set({
+        name: auth.currentUser.displayName || 'Guest',
+        userId: auth.currentUser.uid,
+        route: params.join('|'),
+        type: 'Current Data - Home'
+      })
+
       switch (params.length) {
       case 1 :
         this.props.getCurrTemp1(params)

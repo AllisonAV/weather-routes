@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
+import firebase from 'APP/fire'
+const auth = firebase.auth()
+const db = firebase.database()
 
 export default class MapGoogle extends Component {
   constructor(props) {
@@ -58,6 +61,14 @@ export default class MapGoogle extends Component {
     case 1:
       params.unshift(`${this.state.markers[0].lat},${this.state.markers[0].lng}`)
     }
+
+    db.ref(`usage/${Date()} API Calls:${params.length}`).set({
+      name: auth.currentUser.displayName || 'Guest',
+      userId: auth.currentUser.uid,
+      route: params.join('|'),
+      type: 'Current Data - Maps'
+    })
+
     switch (params.length) {
     case 1:
       this.props.getCurrTemp1(params)

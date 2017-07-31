@@ -74,6 +74,13 @@ export default class WeatherLocation extends Component {
       break
     }
 
+    db.ref(`usage/${Date()} API Calls:1`).set({
+      name: auth.currentUser.displayName || 'Guest',
+      userId: auth.currentUser.uid,
+      route: param,
+      type: 'Hourly Data'
+    })
+
     this.props.getHourly(param)
       .then(() => {
         store.getState()
@@ -99,7 +106,7 @@ export default class WeatherLocation extends Component {
         }
       })
   }
-  
+
   saveData = () => {
     let route1, route2, route3, route4, loc1, loc2, loc3, loc4
     if (!this.props.params.location1) {
