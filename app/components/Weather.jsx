@@ -105,10 +105,6 @@ export default class Weather extends Component {
       this.setState({errorZip4: false})
       this.setState({errorCityState4: false})
 
-      // if all 4 locations are not used, enter in placeholder data for unused parameters
-      // if (params.length === 1) params.push('empty')
-      // if (params.length === 2) params.push('empty')
-      // if (params.length === 3) params.push('empty')
       switch (params.length) {
       case 1 :
         this.props.getCurrTemp1(params)
@@ -139,7 +135,6 @@ export default class Weather extends Component {
         })
         break
       }
-       // browserHistory.push(`/weather/${params[0]}/${params[1]}`)
     }
 // set state error flags for input 1
     if (params[0] === 'zip') this.setState({errorZip1: true})

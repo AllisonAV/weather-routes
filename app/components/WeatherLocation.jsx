@@ -99,22 +99,7 @@ export default class WeatherLocation extends Component {
         }
       })
   }
-  // if (this.props.params.location1) {
-    //   route += this.props.params.location1
-    //   loc += this.props.currData.location1
-    // }
-    // if (this.props.params.location2) {
-    //   route += '|' + this.props.params.location2
-    //   loc += '|' + this.props.currData.location2
-    // }
-    // if (this.props.params.location3) {
-    //   route += '|' + this.props.params.location3
-    //   loc += '|' + this.props.currData.location3
-    // }
-    // if (this.props.params.location4) {
-    //   route += '|' + this.props.params.location4
-    //   loc += '|' + this.props.currData.location4
-    // }
+  
   saveData = () => {
     let route1, route2, route3, route4, loc1, loc2, loc3, loc4
     if (!this.props.params.location1) {

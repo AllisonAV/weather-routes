@@ -85,8 +85,6 @@ export default class LandingPage extends React.Component {
       })
   }
 
-
-
   render() {
     return (
       <div className='jumbotron landing-container landingPageText'>
@@ -106,6 +104,7 @@ export default class LandingPage extends React.Component {
 
 const onWeatherLocationEnter = (nextRouterState) => {
   store.getState()
+  debugger
 }
 
 // const onAppEnter = (userId, replace, next) => {
@@ -132,7 +131,7 @@ render(
       <Route path="/app" component={AppContainer} >
         <IndexRedirect to="/weather" />
         <Route path="/weather" component={WeatherContainer} />
-        <Route path="/weather/:location1/"
+        <Route path="/weather/:location1"
                 component={WeatherLocationContainer}
                 onEnter={onWeatherLocationEnter} />
         <Route path="/weather/:location1/:location2"
