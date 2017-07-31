@@ -59,7 +59,6 @@ export default class WeatherLocation extends Component {
   showHourly = (e) => {
     const whichWell = e.target.getAttribute('data-item')
     let param
-    debugger
     switch (whichWell) {
     case '1':
       param = this.props.routeParams.location1
@@ -100,7 +99,22 @@ export default class WeatherLocation extends Component {
         }
       })
   }
-
+  // if (this.props.params.location1) {
+    //   route += this.props.params.location1
+    //   loc += this.props.currData.location1
+    // }
+    // if (this.props.params.location2) {
+    //   route += '|' + this.props.params.location2
+    //   loc += '|' + this.props.currData.location2
+    // }
+    // if (this.props.params.location3) {
+    //   route += '|' + this.props.params.location3
+    //   loc += '|' + this.props.currData.location3
+    // }
+    // if (this.props.params.location4) {
+    //   route += '|' + this.props.params.location4
+    //   loc += '|' + this.props.currData.location4
+    // }
   saveData = () => {
     let route1, route2, route3, route4, loc1, loc2, loc3, loc4
     if (!this.props.params.location1) {
@@ -133,23 +147,23 @@ export default class WeatherLocation extends Component {
     }
     const locationsRef = db.ref('locations/' + auth.currentUser.uid + '/' + this.state.locationName)
     locationsRef.once('value')
-    .then((snapshot) => {
-      if (snapshot.val() === null) {
-        const theParams = `${route1}|${route2}|${route3}|${route4}`
-        locationsRef.set({
-          routeParams: theParams,
-          location1: loc1,
-          location2: loc2,
-          location3: loc3,
-          location4: loc4
-        })
-        this.setState({locationExists: false})
-        this.closeModal()
-      } else {
-        this.setState({locationExists: true})
-      }
-    })
-    .catch(error => console.log(error))
+      .then((snapshot) => {
+        if (snapshot.val() === null) {
+          const theParams = `${route1}|${route2}|${route3}|${route4}`
+          locationsRef.set({
+            routeParams: theParams,
+            location1: loc1,
+            location2: loc2,
+            location3: loc3,
+            location4: loc4
+          })
+          this.setState({locationExists: false})
+          this.closeModal()
+        } else {
+          this.setState({locationExists: true})
+        }
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
