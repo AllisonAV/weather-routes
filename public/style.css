@@ -83,6 +83,12 @@ img#icon {
    background: rgba(236, 240, 241, 0.6)
 }
 
+.btn-login {
+  height: 50px;
+  width: 170px;
+  margin-left: 28%;
+}
+
 .landingPageButtons {
   text-align: center;
   padding: 20px;
@@ -174,7 +180,9 @@ th img {
 
 .well-buttons {
   margin: 10%;
+  width: 50%;
 }
+
 
 /*.location-container {
   border: 1px solid gray !important;

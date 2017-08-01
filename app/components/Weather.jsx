@@ -44,7 +44,15 @@ export default class Weather extends Component {
       zip1: '',
       zip2: '',
       zip3: '',
-      zip4: ''
+      zip4: '',
+      city1: '',
+      city2: '',
+      city3: '',
+      city4: '',
+      state1: '',
+      state2: '',
+      state3: '',
+      state4: ''
     })
   }
 
@@ -126,7 +134,11 @@ export default class Weather extends Component {
         this.props.getCurrTemp1(params)
         .then(() => {
           store.getState()
-          browserHistory.push(`/weather/${params[0]}`)
+          if (!this.props.currData.error) {
+            browserHistory.push(`/weather/${params[0]}`)
+          } else {
+            window.alert('You entered in an invalid location')
+          }
         })
         break
       case 2 :

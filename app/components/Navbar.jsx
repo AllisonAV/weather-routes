@@ -4,7 +4,6 @@ import firebase from 'APP/fire'
 import store from '../store'
 const auth = firebase.auth()
 
-
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props)
@@ -90,12 +89,10 @@ export default class Navbar extends React.Component {
          style={{justifyContent: 'space-between'}}>
         <Link to="/weather"
               className="navbar-brand">Home</Link>
-        <ul className="nav navbar-nav">
-          <li><Link to="/map"
-                    activeClassName="active-link">Map</Link></li>
-          <li><Link to={`/locations/:${this.state.userId}`}
-                    activeClassName="active-link">Your Routes</Link></li>
-        </ul>
+        <Link to="/map"
+              className="navbar-brand">Map</Link>
+        <Link to={`/locations/:${this.state.userId}`}
+              className="navbar-brand">Your Locations</Link>
     </div>
     <div className="nav navbar-default rightside"
          style={{
