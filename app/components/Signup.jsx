@@ -10,11 +10,12 @@ export default class extends React.Component {
     this.state = {
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      displayName: ''
     }
   }
 
-  setEmailPassword = (evt) => {
+  handleInput = (evt) => {
     this.setState({ [evt.target.id]: evt.target.value })
   }
 
@@ -35,20 +36,33 @@ export default class extends React.Component {
 
   emailSubmit = (evt) => {
     evt.preventDefault()
-    // First confirm email and password & confirm password are all entered
-    if (this.state.email.length && this.state.password.length && this.state.confirmPassword) {
+    // First confirm email and password & confirm password & name are all entered
+    if (this.state.email.length &&
+        this.state.password.length &&
+        this.state.confirmPassword &&
+        this.state.displayName.length) {
       // confirmPasswordsMatch function return a boolean, true if they match, false if not
       if (this.confirmPasswordsMatch()) {
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
           .then((user) => {
-            browserHistory.push(`/weather`)
+            console.log('USER', user)
+            user.updateProfile({
+              displayName: this.state.displayName
+            })
+            .then((user) => {
+              console.log('USER 2', user)
+              browserHistory.push(`/weather`)
+            })
+            .catch(error => {
+              window.alert(error)
+            })
           })
           .catch(error => {
             window.alert(error)
           })
       }
     } else {
-      window.alert('Please fill in both your email and password')
+      window.alert('Please fill in your email, password, and name')
     }
   }
 
@@ -78,7 +92,7 @@ export default class extends React.Component {
                   className="form-control"
                   id="email"
                   placeholder="Email"
-                  onChange={this.setEmailPassword} />
+                  onChange={this.handleInput} />
               </div>
             </div>
             <div className="form-group">
@@ -89,7 +103,7 @@ export default class extends React.Component {
                   id="password"
                   placeholder="Password"
                   ref="password"
-                  onChange={this.setEmailPassword} />
+                  onChange={this.handleInput} />
               </div>
             </div>
             <div className="form-group">
@@ -100,7 +114,18 @@ export default class extends React.Component {
                   id="confirmPassword"
                   ref="confirmPassword"
                   placeholder="Confirm Password"
-                  onChange={this.setEmailPassword} />
+                  onChange={this.handleInput} />
+              </div>
+            </div>
+            <div className="form-group">
+              <div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="displayName"
+                  ref="displayName"
+                  placeholder="Enter Name"
+                  onChange={this.handleInput} />
               </div>
             </div>
             <div className="form-group">

@@ -13,9 +13,7 @@ export default class Navbar extends React.Component {
       userId: ''
     }
 
-    this.handleDisplayName = this.handleDisplayName.bind(this)
-    this.handleUpdateName = this.handleUpdateName.bind(this)
-    this.determineIfDisplayName = this.determineIfDisplayName.bind(this)
+    this.displayName = this.displayName.bind(this)
   }
 
   componentDidMount() {
@@ -28,45 +26,13 @@ export default class Navbar extends React.Component {
     })
   }
 
-  determineIfDisplayName = function() {
+  displayName = function() {
     return auth && auth.currentUser && auth.currentUser.displayName
       ?
         <div>Welcome {auth.currentUser.displayName} </div>
       :
 
-        auth && auth.currentUser && auth.currentUser.isAnonymous
-
-          ?
-            <div> Welcome Guest </div>
-          :
-            <div>
-                <input type="text"
-                      placeholder="Enter Name"
-                      className="form-control"
-                      onChange={this.handleDisplayName}
-                      name="userName"
-                      onClick={this.handleUpdateName}/>
-            </div>
-  }
-
-  handleDisplayName = function(e) {
-    e.preventDefault()
-    this.setState({
-      displayName: e.target.value
-    })
-  }
-
-  handleUpdateName = function(e) {
-    e.preventDefault()
-    auth.currentUser.updateProfile({
-      displayName: this.state.displayName
-    })
-    .then(function() {
-      console.log('success')
-    })
-    .catch(() => {
-      console.log('error')
-    })
+       <div> Welcome Guest </div>
   }
 
   render() {
@@ -100,9 +66,9 @@ export default class Navbar extends React.Component {
            justifyContent: 'flex-end',
            flexDirection: 'row'
          }}>
-      <div className="welcome">{this.determineIfDisplayName()}
+      <div className="welcome">{this.displayName()}
       </div>
-      <button>
+      <button className="btn btn-navbar">
           {auth && auth.currentUser ?
           <h4 className='logout'
               onClick={() => {
@@ -124,21 +90,3 @@ export default class Navbar extends React.Component {
     )
   }
 }
- /*
-holding code for later
-    <div className="navbar-header">
-      {auth && auth.currentUser.displayName
-        ? <div>Welcome {auth.currentUser.displayName} </div>
-        : !!window.loggedIn
-          ?
-            <div>
-              <input type="text"
-                    placeholder="Enter Name"
-                    className="form-control"
-                    onChange={this.handleDisplayName}
-                    name="userName"
-                    onClick={this.handleUpdateName}/>
-            </div>
-          : <div> testing</div>
-      }
-    </div> */
