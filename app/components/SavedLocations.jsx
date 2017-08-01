@@ -92,14 +92,14 @@ export default class SavedLocations extends Component {
                 className='well-sm'>
               <td>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary btn-loc"
                   type="button"
                   data-item={this.state.data[key].routeParams}
                   id={key}
                   onClick={this.retrieveWeather}>Weather
                 </button>
               </td>
-              <td>{key}</td>
+              <td>{key}:</td>
               <td>{this.state.data[key].location1 !== 'empty'
                 ? this.state.data[key].location1
                 : <div /> }
