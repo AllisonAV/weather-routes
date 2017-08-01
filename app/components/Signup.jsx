@@ -41,7 +41,7 @@ export default class extends React.Component {
       if (this.confirmPasswordsMatch()) {
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
           .then((user) => {
-            const queryString = window.location.search
+            browserHistory.push(`/weather`)
           })
           .catch(error => {
             window.alert(error)
