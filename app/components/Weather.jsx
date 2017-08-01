@@ -39,6 +39,15 @@ export default class Weather extends Component {
     this.handleGetWeather = this.handleGetWeather.bind(this)
   }
 
+  ComponentWillMount() {
+    this.setState({
+      zip1: '',
+      zip2: '',
+      zip3: '',
+      zip4: ''
+    })
+  }
+
 // create a function to call get Curr Temp reducer
   handleGetWeather = function(e) {
     e.preventDefault()
