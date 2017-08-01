@@ -95,7 +95,7 @@ export default class extends React.Component {
             </div>
             <div className="form-group">
               <button type="submit"
-                      className="login btn btn-primary"
+                      className="login btn btn-primary btn-login"
                       onClick={this.emailSubmit}>
                 <img
                   id="icon"
@@ -103,7 +103,7 @@ export default class extends React.Component {
                 Login with Email
               </button>
               <button type="submit"
-                      className="login btn btn-primary"
+                      className="login btn btn-primary btn-login"
                       onClick={this.anonSubmit}>
                 Proceed As Guest
               </button>

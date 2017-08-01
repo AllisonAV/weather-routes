@@ -205,10 +205,10 @@ export default class WeatherLocation extends Component {
           <div className="well well-sm col-lg-1">
             { this.state.celsius
             ? <button className="btn btn-primary well-buttons"
-                      onClick={this.changeUnits} > Fahrenheit
+                      onClick={this.changeUnits} >&#8457;
               </button>
             : <button className="btn btn-primary well-buttons"
-                      onClick={this.changeUnits} > Celsius
+                      onClick={this.changeUnits} >&#8451;
               </button> }
             <button className="btn btn-primary well-buttons"
                     onClick={this.showModal} > Save
