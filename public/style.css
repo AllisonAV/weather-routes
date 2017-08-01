@@ -1,0 +1,194 @@
+body {
+  /* background: url("https://static.pexels.com/photos/514056/pexels-photo-514056.jpeg") no-repeat center center fixed;   */
+  /* above uses an image from the internet.  Changed to local image below */         
+  
+  background: url("/pexels-photo-514056.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.navbar {
+	overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index:1; /*z-index ensures images go under the navbar upon scrolling */
+}
+
+.underNav {
+    margin-top: 100px; /* Add a top margin to avoid content overlay */
+}
+
+.welcome {
+  color: #ffffff;
+  margin: 10%;
+  justify-content: space-between;
+}
+
+.rightside {
+  width: 25%;
+  box-shadow: none;
+}
+
+.noRightPadding {
+  padding-right: 0;
+}
+
+ul {
+  margin-left: 30%;
+}
+
+legend {
+  color: black;
+}
+
+img#icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.landingPageText {
+  text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+.landing-container {
+  text-align: center;
+   font-size: 1.5em;
+   width: 500px;
+   vertical-align: middle;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border-radius: 5%;
+   padding: 50px;
+   background: rgba(236, 240, 241, 0.85)
+}
+
+.login-container {
+   width: 500px;
+   vertical-align: middle;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border-radius: 5%;
+   padding: 50px;
+   background: rgba(236, 240, 241, 0.6)
+}
+
+.btn-login {
+  height: 50px;
+  width: 170px;
+  margin-left: 28%;
+}
+
+.landingPageButtons {
+  text-align: center;
+  padding: 20px;
+}
+
+.well {
+	margin: 0 25px 0 25px;
+  color: black;
+  padding: 0;
+}
+
+.well-sm {
+  background-color: #d9edf7;
+}
+
+.alert {
+	padding-top: 20px;
+}
+
+.nav-img {
+	height: 50%;
+	width: 50%;
+}
+
+button {
+	margin: 25px;
+}
+
+
+.headers{
+  color: #54b4eb;
+  
+}
+
+#map{
+	height: 550px;
+  width: 1200px;
+  margin-left: 50px;
+}
+
+.btn-center {
+  margin-left: 45%;
+  margin-bottom: 5px;
+}
+
+.floating-panel {
+  position: absolute;
+  top: 100px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  margin-top: 50px;
+}
+
+
+table {
+  position: relative;
+  table-layout: fixed;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+
+tr td {
+  padding: 5px 15px;
+}
+
+th {
+  text-align: center;
+}
+
+tr th td {
+  padding: 0;
+}
+
+th img {
+  height: 70%;
+  width: 70%;
+}
+
+.well-buttons {
+  margin: 10%;
+  width: 50%;
+}
+
+.btn-signup {
+  margin-left: 28%;
+}
+
+
+
+
+
+
