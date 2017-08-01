@@ -183,16 +183,9 @@ th img {
   width: 50%;
 }
 
-
-/*.location-container {
-  border: 1px solid gray !important;
-  display: inline-block;
-  background-color: #2FA4E7;
-  overflow-y: scroll;
-  border-radius: 50%; 
-  margin: 25px;
-
-}*/
+.btn-signup {
+  margin-left: 28%;
+}
 
 
 
