@@ -37,8 +37,8 @@ export const getCurrTemp1 = (params) =>
 export const getCurrTemp2 = (params) =>
   dispatch =>
       Promise.all([
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`),
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[1]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[1]}.json`),
       ])
     .spread((weatherData1, weatherData2) => {
       let currData = {}
@@ -72,9 +72,9 @@ export const getCurrTemp2 = (params) =>
 export const getCurrTemp3 = (params) =>
   dispatch =>
       Promise.all([
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`),
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[1]}.json`),
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[2]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[1]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[2]}.json`),
       ])
     .spread((weatherData1, weatherData2, weatherData3) => {
       let currData = {}
@@ -117,10 +117,10 @@ export const getCurrTemp3 = (params) =>
 export const getCurrTemp4 = (params) =>
   dispatch =>
       Promise.all([
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`),
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[1]}.json`),
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[2]}.json`),
-        axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[3]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[1]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[2]}.json`),
+        axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[3]}.json`),
       ])
     .spread((weatherData1, weatherData2, weatherData3, weatherData4) => {
       let currData = {}
@@ -171,7 +171,7 @@ export const getCurrTemp4 = (params) =>
 
 export const getHourly = (param) =>
   dispatch =>
-    axios.get(`http://api.wunderground.com/api/${keyWU}/hourly/q/${param}.json`)
+    axios.get(`https://api.wunderground.com/api/${keyWU}/hourly/q/${param}.json`)
     .then((weatherData) => {
       let hourlyData = {}
       if (weatherData.data.response.error) {
