@@ -97,15 +97,14 @@ export default class extends React.Component {
               <button type="submit"
                       className="login btn btn-primary btn-login"
                       onClick={this.emailSubmit}>
-                <img
-                  id="icon"
-                  src="http://www.stickpng.com/assets/images/584856bce0bb315b0f7675ad.png" alt="emailIcon" />
-                Login with Email
+                <span className='glyphicon glyphicon-envelope'/>
+                {'       Login with Email'}
               </button>
               <button type="submit"
                       className="login btn btn-primary btn-login"
                       onClick={this.anonSubmit}>
-                Proceed As Guest
+                <span className='glyphicon glyphicon-user' />
+                {'        Proceed As Guest'}
               </button>
             </div>
           </form>
@@ -131,6 +130,10 @@ export default class extends React.Component {
   }
 }
 
+{/*               <img
+                  id="icon"
+                  src="http://www.stickpng.com/assets/images/584856bce0bb315b0f7675ad.png" alt="emailIcon" />
+*/}
 // import React from 'react'
 
 // import firebase from 'APP/fire'

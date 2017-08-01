@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "weather-routes"
+    "default": "weather-routes",
+    "firstDeployment": "weather-routes"
   }
 }

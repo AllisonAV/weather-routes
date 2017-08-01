@@ -132,11 +132,8 @@ export default class extends React.Component {
               <div>
                 <button type="submit"
                   className='login btn btn-primary btn-signup'>
-                  <img
-                    id="icon"
-                    src="http://www.stickpng.com/assets/images/584856bce0bb315b0f7675ad.png"
-                    alt="emailIcon" />
-                  Sign up with Email</button>
+                  <span className='glyphicon glyphicon-envelope'/>
+                  {'        Sign up with Email'}</button>
               </div>
             </div>
           </form>

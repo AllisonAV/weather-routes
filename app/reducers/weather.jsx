@@ -13,7 +13,7 @@ const GOT_HOURLY = 'GOT_HOURLY'
 // ------------ Weather Dispatchers -----------
 export const getCurrTemp1 = (params) =>
   dispatch =>
-    axios.get(`http://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`)
+    axios.get(`https://api.wunderground.com/api/${keyWU}/conditions/q/${params[0]}.json`)
     .then((weatherData1) => {
       let currData = {}
       if (weatherData1.data.response.error) {

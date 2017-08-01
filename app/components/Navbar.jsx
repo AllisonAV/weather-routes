@@ -47,7 +47,7 @@ export default class Navbar extends React.Component {
        }}>
     <div className="navbar-header">
       <img className="nav-img"
-           src="http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+           src="https://icons.wxug.com/graphics/wu2/logo_130x80.png"
            style={{justifyContent: 'flex-start'}} />
     </div>
     <div className="collapse navbar-collapse"
