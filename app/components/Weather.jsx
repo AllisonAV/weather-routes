@@ -145,21 +145,33 @@ export default class Weather extends Component {
         this.props.getCurrTemp2(params)
         .then(() => {
           store.getState()
-          browserHistory.push(`/weather/${params[0]}/${params[1]}`)
+          if (!this.props.currData.error) {
+            browserHistory.push(`/weather/${params[0]}/${params[1]}`)
+          } else {
+            window.alert('You entered in an invalid location')
+          }
         })
         break
       case 3 :
         this.props.getCurrTemp3(params)
         .then(() => {
           store.getState()
-          browserHistory.push(`/weather/${params[0]}/${params[1]}/${params[2]}`)
+          if (!this.props.currData.error) {
+            browserHistory.push(`/weather/${params[0]}/${params[1]}/${params[2]}`)
+          } else {
+            window.alert('You entered in an invalid location')
+          }
         })
         break
       case 4 :
         this.props.getCurrTemp4(params)
         .then(() => {
           store.getState()
-          browserHistory.push(`/weather/${params[0]}/${params[1]}/${params[2]}/${params[3]}`)
+          if (!this.props.currData.error) {
+            browserHistory.push(`/weather/${params[0]}/${params[1]}/${params[2]}/${params[3]}`)
+          } else {
+            window.alert('You entered in an invalid location')
+          }
         })
         break
       }
