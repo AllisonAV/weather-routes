@@ -59,52 +59,78 @@ export default class WeatherLocation extends Component {
   showHourly = (e) => {
     const whichWell = e.target.getAttribute('data-item')
     let param
+    let alreadyHaveHourly = false
+    debugger
     switch (whichWell) {
     case '1':
       param = this.props.routeParams.location1
-      break
+      if (this.state.hourly1.length) {
+        this.setState({hourly1: []})
+        this.setState({showHourly1: false})
+        alreadyHaveHourly = true
+      }
+      break 
     case '2':
       param = this.props.routeParams.location2
+      if (this.state.hourly2.length) {
+        this.setState({hourly2: []})
+        this.setState({showHourly2: false})
+        alreadyHaveHourly = true
+      }
       break
     case '3':
       param = this.props.routeParams.location3
+      if (this.state.hourly3.length) {
+        this.setState({hourly3: []})
+        this.setState({showHourly3: false})
+        alreadyHaveHourly = true
+      }
       break
     case '4':
       param = this.props.routeParams.location4
+      if (this.state.hourly4.length) {
+        this.setState({hourly4: []})
+        this.setState({showHourly4: false})
+        alreadyHaveHourly = true
+      }
       break
     }
 
-    db.ref(`usage/${Date()} API Calls:1`).set({
-      name: auth.currentUser.displayName || 'Guest',
-      userId: auth.currentUser.uid,
-      route: param,
-      type: 'Hourly Data'
-    })
+    if (alreadyHaveHourly) {
 
-    this.props.getHourly(param)
-      .then(() => {
-        store.getState()
+    } else {
+      db.ref(`usage/${Date()} API Calls:1`).set({
+        name: auth.currentUser.displayName || 'Guest',
+        userId: auth.currentUser.uid,
+        route: param,
+        type: 'Hourly Data'
       })
-      .then(() => {
-        switch (whichWell) {
-        case '1':
-          this.setState({hourly1: this.props.hourlyData.hourly})
-          this.setState({showHourly1: true})
-          break
-        case '2':
-          this.setState({hourly2: this.props.hourlyData.hourly})
-          this.setState({showHourly2: true})
-          break
-        case '3':
-          this.setState({hourly3: this.props.hourlyData.hourly})
-          this.setState({showHourly3: true})
-          break
-        case '4':
-          this.setState({hourly4: this.props.hourlyData.hourly})
-          this.setState({showHourly4: true})
-          break
-        }
-      })
+
+      this.props.getHourly(param)
+        .then(() => {
+          store.getState()
+        })
+        .then(() => {
+          switch (whichWell) {
+          case '1':
+            this.setState({hourly1: this.props.hourlyData.hourly})
+            this.setState({showHourly1: true})
+            break
+          case '2':
+            this.setState({hourly2: this.props.hourlyData.hourly})
+            this.setState({showHourly2: true})
+            break
+          case '3':
+            this.setState({hourly3: this.props.hourlyData.hourly})
+            this.setState({showHourly3: true})
+            break
+          case '4':
+            this.setState({hourly4: this.props.hourlyData.hourly})
+            this.setState({showHourly4: true})
+            break
+          }
+        })
+    }
   }
 
   saveData = () => {
