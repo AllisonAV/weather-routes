@@ -123,24 +123,20 @@ button {
   
 }
 
-#map{
-  height: 80%;
-  width: 90%;
-  position: absolute;
-  margin-left: 5%;
-
-}
-
 #map-container {
-  position: relative;
+    position: relative;
+    padding-bottom: 75%; // This is the aspect ratio
+    height: 0;
+    overflow: hidden;
 }
-
-
-
-
-
-/*  //height: 550px;
-  //width: 1200px; */
+#map {
+    position: absolute;
+    top: 0;
+    margin-left: 1%;
+    margin-right: 1% !important;
+    width: 98% !important;
+    height: 100% !important;
+}
 
 .btn-center {
   margin-left: 45%;
