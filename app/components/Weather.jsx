@@ -209,7 +209,6 @@ export default class Weather extends Component {
     return (
       <div>
         <form id='location' className="form-horizontal" >
-          <fieldset>
 {/* location 1 & 2 headings */}
           <div className="row" >
             <div className="col-lg-2" />
@@ -422,7 +421,6 @@ export default class Weather extends Component {
               <div className="col-lg-2" />
             </div>
             <br />
-            <hr />
  {/* location 3 & 4 headings */}
           <div className="row" >
             <div className="col-lg-2" />
@@ -640,7 +638,6 @@ export default class Weather extends Component {
                     form="location"
                     onClick={this.handleGetWeather}>Get Weather</button>
             <br />
-          </fieldset>
         </form>
       </div>
     )
