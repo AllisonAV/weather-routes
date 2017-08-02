@@ -110,7 +110,7 @@ export default class MapGoogle extends Component {
 
   render() {
     return (
-      <div>
+      <div id="map-container">
         <div className="floating-panel">
 
           <button className="btn btn-primary"
